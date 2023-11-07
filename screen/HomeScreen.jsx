@@ -180,7 +180,7 @@ export default function HomeScreen () {
 
           {/* LOGIN BUTTONS!! */}
           <Pressable
-            onPress={() => {}}
+            onPress={() => {navigation.navigate('Profile')}}
             style={{ marginLeft: 'auto', marginRight: 7 }}
           >
             <Image

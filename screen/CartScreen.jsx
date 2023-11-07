@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { decrementQuantity, incrementQuantity } from '../CartReducer'
 import { decrementQty, incrementQty } from '../ProductReducer'
+import { doc, setDoc } from 'firebase/firestore'
+import { db } from '../firebase'
 
 export default function CartScreen () {
   const cart = useSelector(state => state.cart.cart)
@@ -14,6 +16,21 @@ export default function CartScreen () {
     .reduce((curr, prev) => curr + prev, 0)
   const navigation = useNavigation()
   const dispatch = useDispatch()
+
+  const placeOrder = async () => {
+    navigation.navigate("Order");
+    // dispatch(cleanCart());
+    // await setDoc(
+    //   doc(db, "users", `${userUid}`),
+    //   {
+    //     orders: { ...cart },
+    //     pickUpDetails: route.params,
+    //   },
+    //   {
+    //     merge: true,
+    //   }
+    // );
+  };
   return (
     <>
       <ScrollView style={{ marginTop: '50' }}>
@@ -339,7 +356,7 @@ export default function CartScreen () {
           </Text>
         </View>
 
-        <Pressable onPress={() => proceedToCart()}>
+        <Pressable onPress={() => placeOrder()}>
           <Text style={{ fontSize: 17, fontWeight: '600', color: 'white' }}>
             Place Order
           </Text>
